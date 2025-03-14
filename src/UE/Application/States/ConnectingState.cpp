@@ -11,6 +11,11 @@ ConnectingState::ConnectingState(Context &context)
     context.user.showConnecting();
 }
 
+void ConnectingState::handleAttachAccept() {
+    context.timer.stopTimer();
+    context.setState<ConnectedState>();
+}
+
 void ConnectingState::handleAttachReject() {
     context.timer.stopTimer();
     context.setState<NotConnectedState>();
