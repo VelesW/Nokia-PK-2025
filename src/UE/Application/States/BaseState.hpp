@@ -3,6 +3,7 @@
 #include "IEventsHandler.hpp"
 #include "Logger/PrefixedLogger.hpp"
 #include "Context.hpp"
+#include <optional>
 
 namespace ue
 {
@@ -20,6 +21,14 @@ public:
     void handleSib(common::BtsId btsId) override;
     void handleAttachAccept() override;
     void handleAttachReject() override;
+
+    // CallingState
+    virtual void handleCallDropped();
+    virtual void handleDisconnected();
+    virtual void handleUIEnding();
+    virtual void handleUICalling(std::optional<std::size_t> selectedIndex);
+    virtual void handleCallAccepted(common::PhoneNumber recipient);
+    virtual void handleUnknownRecipient(common::PhoneNumber recipient);
 
 protected:
     Context& context;
